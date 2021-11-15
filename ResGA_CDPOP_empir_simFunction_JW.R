@@ -9,15 +9,10 @@
 
 empir.sim <- function(catraster,
                       geosites,
-                       f1 = 40,
-                       f2 = 1,
-                       f3 = 400,
-                       f4 = 400,
-                       f5 = 40,
                        RMexpvar_r = 1,
                        RMexpscale_r = 15,
-                       #habitat = 0.5,
-                       #n_ind = 500,
+                       habitat = 0.5,
+                       n_ind = 15000,
                        n_samplepoints = 250,
                        start = 1,
                        seed = 1,
@@ -35,7 +30,7 @@ empir.sim <- function(catraster,
                        loci = 17,
                        alleles = 20,
                        matemoveno = 1, ## 1 = Linear, 2 = Inv sq; 9 = custom prob matrix
-                       matemovethresh = 0.25,
+                       matemovethresh = 1,
                        MeanFecundity = 4,
                        n_axes = 64)
   {
@@ -74,18 +69,20 @@ empir.sim <- function(catraster,
 
     # >> Create Truth ---------------------------------------------------------
     Resist <- catraster 
-    Resist[Resist==0] <- 250
-    Resist[Resist==2] <- 2500
-    Resist[Resist==3] <- 2500
-    Resist[Resist==4] <- 250
+    Resist[Resist==0] <- 40
+    Resist[Resist==2] <- 400
+    Resist[Resist==3] <- 400
+    Resist[Resist==4] <- 40
     # Load sampling sites ------------------------------------------------------
-    pts <- geosites
-      
-    ### I am not sure why I needed to do the following
-    # sample.thresh <- as.numeric(quantile(Resist, habitat))
-    # sample.extract <- extract(Resist, pts)
-    # sample.suit <- pts[sample.extract <= sample.thresh,]
-    # pts <- SpatialPoints(sample.suit[sample(nrow(sample.suit), n_ind, replace = F),])
+    pts <- na.omit(unique(floor(cbind(runif(50000, 328302.5,333422.5), 
+                              runif(50000, 5512494 , 5517094 )))))
+    
+    sample.thresh <- as.numeric(quantile(Resist, habitat))
+    
+    sample.extract <- extract(Resist, pts)
+    sample.suit <- pts[sample.extract <= sample.thresh,]
+    sample.suit <- na.omit(sample.suit)
+    pts <- SpatialPoints(sample.suit[sample(nrow(sample.suit), n_ind, replace = F),])
     
     ### 
     

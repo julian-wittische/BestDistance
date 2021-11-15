@@ -19,12 +19,15 @@ source("cdpop_from_R_function.R") # another version is available on WP's GitHub
 source("ResistanceGA_CDPOP_simFunction_JW.R")
 
 source("ResGA_CDPOP_empir_simFunction_JW.R")
+
+memory.limit()
+
 geosites <- SpatialPoints(read.table("Data/geo.txt", header=TRUE)[,2:3],
                           CRS(SRS_string = "EPSG:3044"))
 
 catraster <- raster("Data/all5.asc", crs = "EPSG:3044")
 catraster <- crop(catraster, extent(geosites)+120)
-
+plot(catraster)
 
 empir.sim(catraster = catraster,
           geosites = geosites,
