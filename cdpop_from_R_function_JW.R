@@ -63,7 +63,7 @@
 #' 
 #' 
 #' 
-cdpop <- function(CDPOP.py,
+cdpopJW <- function(CDPOP.py,
                   sim_name = 'output_',
                   pts,
                   sim_dir,
@@ -336,81 +336,88 @@ cdpop <- function(CDPOP.py,
                          cdinfect = cdinfect,
                          transmissionprob = transmissionprob,
                          check.names = F)
-
+  
   write.table(cdpop_df,
               paste0(data_dir, "CDPOP_inputs.csv"), 
               sep = ",",
               row.names = FALSE,
               col.names = TRUE,
               quote = F)
-
+  
   
   # Run CDPOP ---------------------------------------------------------------
   print("Running CDPOP...")
-
+  
   system(paste("python", CDPOP.py, data_dir, "CDPOP_inputs.csv", sim_name))
-
-
+  
+  
   # Import Results ----------------------------------------------------------
-
+  
   fi <- file.info(list.files(path = sim_dir,
                              pattern = "grid",
                              recursive = T,
                              full.names = T))
-
+  
   ## Get latest simulation results
   newest_sim <- dirname(rownames(fi)[which.max(fi$mtime)])
-
+  
   grid_dir <- list.files(path = newest_sim,
                          pattern = "grid",
                          recursive = T,
                          full.names = T)
-
+  
   read.grid <- function(grid,
                         pops = NULL){
     suppressWarnings(
       cdpop_out <- read_csv(grid,
                             col_types = cols(Subpopulation = col_skip(),
-                                             XCOORD = col_skip(), YCOORD = col_skip(),
+                                             #XCOORD = col_skip(), YCOORD = col_skip(),
                                              sex = col_skip(), age = col_skip(),
                                              infection = col_skip(), DisperseCDist = col_skip(),
                                              hindex = col_skip()))
     )
-
+    #geogr <- read_csv(grid)[which(cdpop_out$ID != "OPEN"),c("XCOORD", "YCOORD")]
     occ_pop <- which(cdpop_out$ID != "OPEN")
-
+    
     if(!is.null(pops)) {
       return(occ_pop)
     } else {
-
-      cd_df <- as.data.frame(cdpop_out[occ_pop,-1])
-
+      
+      cd_df <- as.data.frame(cdpop_out[occ_pop,c(-1,-2,-3)])
+      cd_df[,ncol(cd_df)] <- gsub(",","",cd_df[,ncol(cd_df)])
+      cd_df <- apply(as.matrix(cd_df),2,as.numeric)
+      
+      fakedf <- data.frame(matrix(rep(paste(sample(1:alleles,nrow(cd_df),replace=TRUE),
+                                            sample(1:alleles,nrow(cd_df),replace=TRUE),
+                                            sep="/"), loci), ncol=loci)) 
+      
+      colnames(fakedf) <- .genlab("Locus",loci)
       ncode <- 1
-      gi <- adegenet::df2genind(cd_df,
-                                ncode = ncode,
-                                type = "codom")
+      gi <- adegenet::df2genind(fakedf, ploidy=2, sep="/", type="codom")
+      gi@tab <- cd_df
+      gi@other$xy <- cdpop_out[occ_pop, c(1,2)]
       return(gi)
     }
   }
-
+  
   grid_list <- lapply(grid_dir, read.grid)
   pop_list <- lapply(grid_dir, read.grid, pops = TRUE)
-
+  
   gens <- basename(grid_dir) %>% sub('.csv', '', .) %>% # <
     sub('grid', '',.) %>% as.numeric()
-
+  
   grid_list <- grid_list[order(gens)]
   pop_list <- pop_list[order(gens)]
-
+  
   names(pop_list) <- names(grid_list) <- paste0('gen_', sort(gens))
-
-
+  
+  
   # Wrap-up -----------------------------------------------------------------
-
+  
   out <- list(grid_list = grid_list,
               pop_list = pop_list)
   return(out)
-
+  
 }
 
 # PCA dist -------------------------------------------------------
@@ -431,7 +438,7 @@ gi_samp <- function(gi,
                     n_ind = 100) {
   ind_samp <- sort(sample(1:nInd(gi), n_ind))
   gi_s <- gi[ind_samp]
-
+  
   out <- list(genind = gi_s,
               pop_samp = ind_samp)
 }
