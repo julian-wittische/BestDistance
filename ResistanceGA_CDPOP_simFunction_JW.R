@@ -248,8 +248,8 @@ ResistanceGAMS.sim <- function(r.dim = 100,
     plot(stack(r.stack,Resist))
     
     # Generate Points ---------------------------------------------------------
-    pts <- unique(floor(cbind(runif(5000, 0.15 * r.dim, 0.85 * r.dim), 
-                              runif(5000, 0.15 * r.dim, 0.85 * r.dim))))
+    pts <- unique(floor(cbind(runif(10000, 0.15 * r.dim, 0.85 * r.dim), 
+                              runif(10000, 0.15 * r.dim, 0.85 * r.dim))))
     
     sample.thresh <- as.numeric(quantile(Resist, habitat))
     

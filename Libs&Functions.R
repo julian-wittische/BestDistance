@@ -15,6 +15,8 @@ library(adegenet)
 library(readr)
 library(spatialEco)
 library(sp)
+library(EcoGenetics)
+library(RClone)
 
 source("cdpop_from_R_function_JW.R")
 source("ResGA_CDPOP_empir_simFunction_JW.R")

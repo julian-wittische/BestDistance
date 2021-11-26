@@ -9,21 +9,23 @@ empir.sim(catraster = catraster_SA_coarser_cropped,
           iters=1,
           loci=16,
           alleles=10,
-          n_ind = 5000)
+          n_ind = 6000)
 1
 
 cdpop_sim1 <- readRDS("cdpop_sim_TEST/Results/iter__1/cdpop_sim.rds")
-
-cdpop_sim1$grid_list$gen_101@other$xy
 
 a_tab <- adegenet::tab(cdpop_sim1$grid_list$gen_101)
 pc <- prcomp(a_tab)
 pc_dist <- as.matrix(dist(pc$x[,1:10]))
 pc_dist
 geo_dist <- as.matrix(dist(cdpop_sim1$grid_list$gen_101@other$xy))
-plot(log(geo_dist), pc_dist)
+geo_dist[geo_dist==0] <- NA
+
 mantel.randtest(dist(pc$x[,1:10]), dist(cdpop_sim1$grid_list$gen_101@other$xy))
 
-# To calculate Loiselle's kinship I need to use the function eco.kin.Loiselle() from the EcoGenetics package
-# First I need to convert genind in ecogen using ecogen2genind()
-devtools::install_github("leandroroser/EcoGenetics-devel")
+RClonedf <- genind2df(cdpop_sim1$grid_list$gen_101)
+RCloneobj <- convert_GC(RClonedf, 2, "")
+simLoiselle_RClone <- kinship_Loiselle_core(RCloneobj)
+simLoiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(cdpop_sim1$grid_list$gen_101))
+
+plot(log(geo_dist), simLoiselle_EcoGenetics)
