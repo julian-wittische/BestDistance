@@ -70,7 +70,7 @@ empir.sim <- function(catraster = catraster,
     Resist[Resist==0] <- 40
     Resist[Resist==2] <- 400
     Resist[Resist==3] <- 400
-    Resist[Resist==4] <- 40
+    Resist[Resist==4] <- 20
     # Load sampling sites ------------------------------------------------------
     pts <- unique(floor(cbind(runif(10000, extent(catraster)[1], extent(catraster)[2]), 
                               runif(10000, extent(catraster)[3], extent(catraster)[4]))))
