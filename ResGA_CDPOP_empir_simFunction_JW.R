@@ -67,10 +67,11 @@ empir.sim <- function(catraster = catraster,
 
     # >> Create Truth ---------------------------------------------------------
     Resist <- catraster 
-    Resist[Resist==0] <- 40
-    Resist[Resist==2] <- 400
-    Resist[Resist==3] <- 400
-    Resist[Resist==4] <- 20
+    Resist[Resist==0] <- 40 # Remaing built-up
+    Resist[Resist==1] <- 30 # Forest and open areas
+    Resist[Resist==2] <- 400 # Urban areas
+    Resist[Resist==3] <- 400 # River
+    Resist[Resist==4] <- 20 # Transport infrastructure
     # Load sampling sites ------------------------------------------------------
     pts <- unique(floor(cbind(runif(10000, extent(catraster)[1], extent(catraster)[2]), 
                               runif(10000, extent(catraster)[3], extent(catraster)[4]))))

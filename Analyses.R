@@ -47,6 +47,20 @@ abline(IBD, col="red")
 
 ################################################################################
 ################################################################################
+
+
+################################################################################
+sim_geo_dist <- as.matrix(dist(cdpop_sim1$grid_list$gen_101@other$xy))
+sim_geo_dist[sim_geo_dist==0] <- NA
+
+simLoiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(cdpop_sim1$grid_list$gen_101))
+
+mantel.randtest(as.dist(sim_geo_dist), as.dist(1-simLoiselle_EcoGenetics))
+IBDsim <- lm(c(as.dist(simLoiselle_EcoGenetics))~log(c(as.dist(sim_geo_dist))))
+summary(IBDsim)
+plot(log(sim_geo_dist), simLoiselle_EcoGenetics)
+abline(IBDsim, col="red")
+
 ################################################################################
 # Find the empirical distribution of lizard abundance at our new res
 
@@ -60,22 +74,49 @@ lizcellrowcol <- rowColFromCell(lizgrid, as.numeric(names(lizpercell[,1])))
 lizgrid[lizcellrowcol] <- lizpercell
 
 plot(lizgrid)
+################################################################################
+# Let us try to subsample to get a similar sampling as the empirical dataset
+sim_geosites <- SpatialPoints(cdpop_sim1$grid_list$gen_101@other$xy,
+                          CRS(SRS_string = "EPSG:3044"))
 
-# ################################################################################
-sim_geo_dist <- as.matrix(dist(cdpop_sim1$grid_list$gen_101@other$xy))
-sim_geo_dist[sim_geo_dist==0] <- NA
+lizgridno0 <- lizgrid 
+lizgridno0[lizgridno0==0] <- NA
+
+#subs <- extract(lizgridno0, sim_geosites, cellnumber-TRUE, sp=TRUE)
+
+library(spatialEco)
+lizgridno0poly <- rasterToPolygons(lizgridno0)
+plot(lizgridno0poly)
+subs <- erase.point(sim_geosites, lizgridno0poly, inside=FALSE)
 
 
-# a_tab <- adegenet::tab(cdpop_sim1$grid_list$gen_101)
-# pc <- prcomp(a_tab)
-# pc_dist <- as.matrix(dist(pc$x[,1:10]))
-# pc_dist
 
-# RClonedf <- genind2df(cdpop_sim1$grid_list$gen_101)
-# RCloneobj <- convert_GC(RClonedf, 2, "")
-# simLoiselle_RClone <- kinship_Loiselle_core(RCloneobj)
-simLoiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(cdpop_sim1$grid_list$gen_101))
+"%IN%" <- function(x, y) interaction(x) %in% interaction(y)
 
-mantel.randtest(dist(pc$x[,1:10]), dist(cdpop_sim1$grid_list$gen_101@other$xy))
+index <- cdpop_sim1$grid_list$gen_101@other$xy  %IN% as.data.frame(subs)
+sim_subs_genind <- cdpop_sim1$grid_list$gen_101[index]
+sim_subs_genind
 
-plot(log(geo_dist), simLoiselle_EcoGenetics)
+sim_subs_geo_dist <- as.matrix(dist(sim_subs_genind@other$xy))
+sim_subs_geo_dist[sim_geo_dist==0] <- NA
+
+sim_subs_Loiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(sim_subs_genind))
+
+mantel.randtest(as.dist(sim_subs_geo_dist), as.dist(1-sim_subs_Loiselle_EcoGenetics))
+IBDsim_subs <- lm(c(as.dist(sim_subs_Loiselle_EcoGenetics))~log(c(as.dist(sim_subs_geo_dist))))
+summary(IBDsim_subs)
+plot(log(sim_subs_geo_dist), sim_subs_Loiselle_EcoGenetics)
+abline(IBDsim_subs, col="red")
+
+par(mfrow=c(1,2))
+
+plot(log(sim_subs_geo_dist), sim_subs_Loiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
+abline(IBDsim_subs, col="red")
+
+plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
+abline(IBD, col="red")
+
+saveRDS(sim_subs_genind,"cdpop_sim_TEST/Results/iter__1/sim_subs_genind.rds")
+lol <- readRDS("cdpop_sim_TEST/Results/iter__1/sim_subs_genind.rds")
+lol
+plot(lol@other$xy)

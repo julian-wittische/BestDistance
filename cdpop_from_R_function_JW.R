@@ -387,13 +387,17 @@ cdpopJW <- function(CDPOP.py,
       cd_df[,ncol(cd_df)] <- gsub(",","",cd_df[,ncol(cd_df)])
       cd_df <- apply(as.matrix(cd_df),2,as.numeric)
       
-      fakedf <- data.frame(matrix(rep(paste(paste0("A", rep_len(0:(alleles-1),length.out = nrow(cd_df))),
-                                            paste0("A", rep_len(0:(alleles-1),length.out = nrow(cd_df))),
-                                            sep="/"), loci), ncol=loci))
+      # fakedf <- data.frame(matrix(rep(paste(paste0("A", rep_len(0:(alleles-1),length.out = nrow(cd_df))),
+      #                                       paste0("A", rep_len(0:(alleles-1),length.out = nrow(cd_df))),
+      #                                       sep="/"), loci), ncol=loci))
+      
+      fakedf<-data.frame(matrix(rep(paste(LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
+                                          LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
+                                          sep="/"), loci), ncol=loci))
       
       colnames(fakedf) <- paste0("L",1:loci)
       ncode <- 1
-      gi <- adegenet::df2genind(fakedf, ploidy=2, sep="/", type="codom")
+      gi <<- adegenet::df2genind(fakedf, ploidy=2, sep="/", type="codom")
       gi@tab <- cd_df
       colnames(gi@tab) <- paste(names(gi$all.names), unlist(gi$all.names), sep=".")
       gi@other$xy <- cdpop_out[occ_pop, c(1,2)]
