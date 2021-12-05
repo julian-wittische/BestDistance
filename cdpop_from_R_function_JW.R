@@ -1,4 +1,12 @@
-#' @author Bill Peterman
+################################################################################
+########## Julian Wittische - November 2021 - Simulating connectivity ##########
+################################################################################
+
+### Acknowledgements:
+# This is based on previous work by William Peterman and Kristopher Winiarski
+# Thanks also to Dr Erin Landguth who welcomed me for a short visit in her lab
+
+#' @author Bill Peterman/Julian Wittische
 #' @description Function to run CDPOP from R
 #' 
 #' @param CDPOP.py
