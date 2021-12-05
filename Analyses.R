@@ -116,7 +116,7 @@ abline(IBDsim_subs, col="red")
 plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
 abline(IBD, col="red")
 
-saveRDS(sim_subs_genind,"cdpop_sim_TEST/Results/iter__1/sim_subs_genind.rds")
-lol <- readRDS("cdpop_sim_TEST/Results/iter__1/sim_subs_genind.rds")
+saveRDS(sim_subs_genind,"sim_subs_genind.rds")
+lol <- readRDS("sim_subs_genind.rds")
 lol
 plot(lol@other$xy)
