@@ -50,16 +50,16 @@ abline(IBD, col="red")
 
 
 ################################################################################
-sim_geo_dist <- as.matrix(dist(cdpop_sim1$grid_list$gen_101@other$xy))
-sim_geo_dist[sim_geo_dist==0] <- NA
-
-simLoiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(cdpop_sim1$grid_list$gen_101))
-
-mantel.randtest(as.dist(sim_geo_dist), as.dist(1-simLoiselle_EcoGenetics))
-IBDsim <- lm(c(as.dist(simLoiselle_EcoGenetics))~log(c(as.dist(sim_geo_dist))))
-summary(IBDsim)
-plot(log(sim_geo_dist), simLoiselle_EcoGenetics)
-abline(IBDsim, col="red")
+# sim_geo_dist <- as.matrix(dist(cdpop_sim1$grid_list$gen_101@other$xy))
+# sim_geo_dist[sim_geo_dist==0] <- NA
+# 
+# simLoiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(cdpop_sim1$grid_list$gen_101))
+# 
+# mantel.randtest(as.dist(sim_geo_dist), as.dist(1-simLoiselle_EcoGenetics))
+# IBDsim <- lm(c(as.dist(simLoiselle_EcoGenetics))~log(c(as.dist(sim_geo_dist))))
+# summary(IBDsim)
+# plot(log(sim_geo_dist), simLoiselle_EcoGenetics)
+# abline(IBDsim, col="red")
 
 ################################################################################
 # Find the empirical distribution of lizard abundance at our new res
@@ -89,8 +89,6 @@ lizgridno0poly <- rasterToPolygons(lizgridno0)
 plot(lizgridno0poly)
 subs <- erase.point(sim_geosites, lizgridno0poly, inside=FALSE)
 
-
-
 "%IN%" <- function(x, y) interaction(x) %in% interaction(y)
 
 index <- cdpop_sim1$grid_list$gen_101@other$xy  %IN% as.data.frame(subs)
@@ -98,7 +96,7 @@ sim_subs_genind <- cdpop_sim1$grid_list$gen_101[index]
 sim_subs_genind
 
 sim_subs_geo_dist <- as.matrix(dist(sim_subs_genind@other$xy))
-sim_subs_geo_dist[sim_geo_dist==0] <- NA
+sim_subs_geo_dist[sim_subs_geo_dist==0] <- NA
 
 sim_subs_Loiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(sim_subs_genind))
 
