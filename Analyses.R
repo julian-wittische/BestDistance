@@ -95,6 +95,8 @@ index <- cdpop_sim1$grid_list$gen_101@other$xy  %IN% as.data.frame(subs)
 sim_subs_genind <- cdpop_sim1$grid_list$gen_101[index]
 sim_subs_genind
 
+#sim_subs_genind <- readRDS("sim_subs_genind.rds")
+
 sim_subs_geo_dist <- as.matrix(dist(sim_subs_genind@other$xy))
 sim_subs_geo_dist[sim_subs_geo_dist==0] <- NA
 
@@ -115,6 +117,6 @@ plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,
 abline(IBD, col="red")
 
 saveRDS(sim_subs_genind,"sim_subs_genind.rds")
-lol <- readRDS("sim_subs_genind.rds")
-lol
-plot(lol@other$xy)
+# lol <- readRDS("sim_subs_genind.rds")
+# lol
+# plot(lol@other$xy)

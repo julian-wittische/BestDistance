@@ -53,6 +53,6 @@ empir.sim(catraster = catraster_SA_coarser_cropped,
           iters=1,
           loci=16,
           alleles=12,
-          n_ind = 3500,
-          habitat=0.5)
+          n_ind = 4000,
+          habitat=0.4)
 

@@ -405,9 +405,15 @@ cdpopJW <- function(CDPOP.py,
       
       colnames(fakedf) <- paste0("L",1:loci)
       ncode <- 1
-      gi <<- adegenet::df2genind(fakedf, ploidy=2, sep="/", type="codom")
+      gi <- adegenet::df2genind(fakedf, ploidy=2, sep="/", type="codom")
       gi@tab <- cd_df
-      colnames(gi@tab) <- paste(names(gi$all.names), unlist(gi$all.names), sep=".")
+      propertabnames <- character(0)
+      for (i in 1:loci){
+        propertabnames <- c(propertabnames, paste(names(gi$all.names)[i],
+                                unlist(gi$all.names)[1:alleles],
+                                sep="."))                                
+      }
+      colnames(gi@tab) <- propertabnames
       gi@other$xy <- cdpop_out[occ_pop, c(1,2)]
       gi@tab <- apply(gi@tab, 2, as.integer)
       return(gi)
