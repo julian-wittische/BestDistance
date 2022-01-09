@@ -47,12 +47,15 @@ catraster_SA_coarser_cropped <- crop(catraster_SA_coarser,
 catraster_SA_coarser_cropped <- reclassify(catraster_SA_coarser_cropped,
                                            cbind(c(3,4),c(4,3)))
 
+source("cdpop_from_R_function_JW.R")
+source("ResGA_CDPOP_empir_simFunction_JW.R")
+
 empir.sim(catraster = catraster_SA_coarser_cropped,
           geosites = geosites,
-          parallel=3,
-          iters=1,
-          loci=16,
-          alleles=12,
-          n_ind = 4000,
-          habitat=0.4)
-
+          parallel = 3,
+          iters = 1,
+          loci = 16,
+          alleles = 12,
+          n_ind = 2000,
+          habitat = 0.2)
+#try to lower n_ind and habitat together

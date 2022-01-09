@@ -67,14 +67,14 @@ empir.sim <- function(catraster = catraster,
 
     # >> Create Truth ---------------------------------------------------------
     Resist <- catraster 
-    Resist[Resist==0] <- 40 # Remaing built-up
-    Resist[Resist==1] <- 30 # Forest and open areas
-    Resist[Resist==2] <- 400 # Urban areas
-    Resist[Resist==3] <- 400 # River
-    Resist[Resist==4] <- 20 # Transport infrastructure
+    Resist[Resist==0] <- 20 # Remaing built-up
+    Resist[Resist==1] <- 10 # Forest and open areas
+    Resist[Resist==2] <- 80 # Urban areas
+    Resist[Resist==3] <- 80 # River
+    Resist[Resist==4] <- 1 # Transport infrastructure
     # Load sampling sites ------------------------------------------------------
-    pts <- unique(floor(cbind(runif(10000, extent(catraster)[1], extent(catraster)[2]), 
-                              runif(10000, extent(catraster)[3], extent(catraster)[4]))))
+    pts <- unique(floor(cbind(runif(100000, extent(catraster)[1], extent(catraster)[2]), 
+                              runif(100000, extent(catraster)[3], extent(catraster)[4]))))
     
     sample.thresh <- as.numeric(quantile(Resist, habitat))
     
@@ -112,7 +112,7 @@ empir.sim <- function(catraster = catraster,
                        gridformat = gridformat,
                        loci = loci,
                        alleles = alleles,
-                       K_env = 10000,
+                       K_env = 100,
                        matemoveno = matemoveno, ## 1 = Linear, 5 = Neg exp; 9 = custom prob matrix
                        matemovethresh = m_thresh,
                        MeanFecundity = MeanFecundity)
