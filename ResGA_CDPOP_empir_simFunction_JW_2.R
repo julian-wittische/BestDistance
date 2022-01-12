@@ -8,44 +8,44 @@
 empir.sim <- function(catraster = catraster,
                       geosites = geosites,
                       habitat = 0.5,
-                       RMexpvar_r = 1,
-                       RMexpscale_r = 15,
-                       n_ind = 10000,
-                       n_samplepoints = 250,
-                       start = 1,
-                       seed = 1,
-                       iters = 1,
-                       parallel =3,
-                       method = 'standard',
-                       maxiter = 100,                               
-                       JULIA_HOME = "C:/Users/jwittische/AppData/Local/Programs/Julia-1.6.3/bin/",
-                       CDPOP.py = 'C:/Users/jwittische/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
-                       sim_name = 'output_',
-                       sim_dir = "C:/Users/jwittische/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
-                       looptime = 101,
-                       output_years = 100,
-                       gridformat = 'cdpop',
-                       loci = 17,
-                       alleles = 20,
-                       matemoveno = 1, ## 1 = Linear, 2 = Inv sq; 9 = custom prob matrix
-                       matemovethresh = 0.1,
-                       matemoveparA = 1,
-                       matemoveparB = 5,
-                       MeanFecundity = 4,
-                       n_axes = 64)
-  {
-
+                      RMexpvar_r = 1,
+                      RMexpscale_r = 15,
+                      n_ind = 10000,
+                      n_samplepoints = 250,
+                      start = 1,
+                      seed = 1,
+                      iters = 1,
+                      parallel =3,
+                      method = 'standard',
+                      maxiter = 100,                               
+                      JULIA_HOME = "C:/Users/jwittische/AppData/Local/Programs/Julia-1.6.3/bin/",
+                      CDPOP.py = 'C:/Users/jwittische/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
+                      sim_name = 'output_',
+                      sim_dir = "C:/Users/jwittische/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
+                      looptime = 101,
+                      output_years = 100,
+                      gridformat = 'cdpop',
+                      loci = 17,
+                      alleles = 20,
+                      matemoveno = 1, ## 1 = Linear, 2 = Inv sq; 9 = custom prob matrix
+                      matemovethresh = 0.1,
+                      matemoveparA = 1,
+                      matemoveparB = 5,
+                      MeanFecundity = 4,
+                      n_axes = 64)
+{
+  
   if(is.null(start)) {
     stop("Specify integer `start` value!!!")
   }
-
+  
   # Main Function -----------------------------------------------------------
   for(z in start:iters){
-
+    
     # >> Make Random Surfaces -------------------------------------------------
     
     #  * Empirical surface ------------------------------------------------------------
-
+    
     # Load ordinal variable template
     orig <- catraster #not the same as Copernicus! (3035)
     
@@ -57,16 +57,16 @@ empir.sim <- function(catraster = catraster,
     # rand <- raster(scale(as.matrix(rf.sim)))
     # rand <- setExtent(rand, bb, snap= TRUE)
     # random_1 <- rand
-
+    
     # >> Create Directory -----------------------------------------------------
-
+    
     dir.create(paste0(sim_dir, "Results/",
                       'iter__', z),
                recursive = TRUE) 
     
     out <- paste0(sim_dir, "Results/",
                   'iter__', z, "/")
-
+    
     # >> Create Truth ---------------------------------------------------------
     Resist <- catraster 
     Resist[Resist==0] <- 20 # Remaing built-up
@@ -104,22 +104,22 @@ empir.sim <- function(catraster = catraster,
     m_thresh <- quantile(lower(r.dist), matemovethresh)
     
     cdpop_sim <- cdpopJW(CDPOP.py = "C:/Users/jwittische/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py",
-                       sim_name = sim_name,
-                       pts = pts,
-                       resist_rast = Resist,
-                       resist_mat = r.dist,
-                       sim_dir = out,
-                       looptime = looptime,
-                       output_years = output_years,
-                       gridformat = gridformat,
-                       loci = loci,
-                       alleles = alleles,
-                       K_env = 10000,
-                       matemoveno = matemoveno, ## 1 = Linear, 5 = Neg exp; 9 = custom prob matrix
-                       matemovethresh = m_thresh,
-                       matemoveparA = matemoveparA,
-                       matemoveparB = matemoveparB,
-                       MeanFecundity = MeanFecundity)
+                         sim_name = sim_name,
+                         pts = pts,
+                         resist_rast = Resist,
+                         resist_mat = r.dist,
+                         sim_dir = out,
+                         looptime = looptime,
+                         output_years = output_years,
+                         gridformat = gridformat,
+                         loci = loci,
+                         alleles = alleles,
+                         K_env = 10000,
+                         matemoveno = matemoveno, ## 1 = Linear, 5 = Neg exp; 9 = custom prob matrix
+                         matemovethresh = m_thresh,
+                         matemoveparA = matemoveparA,
+                         matemoveparB = matemoveparB,
+                         MeanFecundity = MeanFecundity)
     
     saveRDS(cdpop_sim, paste0(out,"cdpop_sim.rds"))
     
