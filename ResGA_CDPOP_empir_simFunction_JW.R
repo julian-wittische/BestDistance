@@ -71,7 +71,7 @@ empir.sim <- function(catraster = catraster,
     Resist <- catraster 
     Resist[Resist==0] <- 20 # Remaing built-up
     Resist[Resist==1] <- 10# Forest and open areas
-    Resist[Resist==2] <- 80 # Urban areas
+    Resist[Resist==2] <- 70 # Urban areas
     Resist[Resist==3] <- 80 # River
     Resist[Resist==4] <- 1 # Transport infrastructure
     # Load sampling sites ------------------------------------------------------
