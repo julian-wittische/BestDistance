@@ -119,7 +119,7 @@ points(sim_subs_genind@other$xy)
 # plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
 # abline(IBD, col="red")
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_HIGHRES_LOWIBD.rds")
+# saveRDS(sim_subs_genind,"sim_subs_genind_LOWRES_HIGHIBD.rds")
 # lol <- readRDS("sim_subs_genind.rds")
 # highlow <- readRDS("sim_subs_genind_HIGHRES_LOWIBD.rds")
 # highhigh <- readRDS("sim_subs_genind_HIGHRES_HIGHIBD.rds")

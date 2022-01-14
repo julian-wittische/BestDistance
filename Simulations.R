@@ -56,9 +56,9 @@ empir.sim(catraster = catraster_SA_coarser_cropped,
           iters = 1,
           loci = 16,
           alleles = 12,
-          n_ind = 3500,
+          n_ind = 4000,
           habitat = 0.6,
           matemoveno = 5,
           matemoveparA = 1,
-          matemoveparB = 5.5)
+          matemoveparB = 0.6)
 #try to lower n_ind and habitat together
