@@ -18,13 +18,13 @@ empir.sim <- function(catraster = catraster,
                        parallel =3,
                        method = 'standard',
                        maxiter = 100,                               
-                       #JULIA_HOME = "C:/Users/jwittische/AppData/Local/Programs/Julia-1.6.3/bin/",
-                       JULIA_HOME = "C:/Users/Utilisateur/AppData/Local/Programs/Julia-1.7.1/bin/",
-                       #CDPOP.py = 'C:/Users/jwittische/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
-                       CDPOP.py = 'C:/Users/Utilisateur/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
+                       JULIA_HOME = "C:/Users/jwittische/AppData/Local/Programs/Julia-1.6.3/bin/",
+                       #JULIA_HOME = "C:/Users/Utilisateur/AppData/Local/Programs/Julia-1.7.1/bin/",
+                       CDPOP.py = 'C:/Users/jwittische/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
+                       #CDPOP.py = 'C:/Users/Utilisateur/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
                        sim_name = 'output_',
-                       #sim_dir = "C:/Users/jwittische/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
-                       sim_dir = "C:/Users/Utilisateur/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
+                       sim_dir = "C:/Users/jwittische/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
+                       #sim_dir = "C:/Users/Utilisateur/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
                        looptime = 101,
                        output_years = 100,
                        gridformat = 'cdpop',
@@ -72,10 +72,10 @@ empir.sim <- function(catraster = catraster,
 
     # >> Create Truth ---------------------------------------------------------
     Resist <- catraster 
-    Resist[Resist==0] <- 2.86 # Remaing built-up
-    Resist[Resist==1] <- 1.43# Forest and open areas
-    Resist[Resist==2] <- 10 # Urban areas
-    Resist[Resist==3] <- 11.43 # River
+    Resist[Resist==0] <- 20 # Remaing built-up
+    Resist[Resist==1] <- 10# Forest and open areas
+    Resist[Resist==2] <- 70 # Urban areas
+    Resist[Resist==3] <- 80 # River
     Resist[Resist==4] <- 1 # Transport infrastructure
     # Load sampling sites ------------------------------------------------------
     pts <- unique(floor(cbind(runif(100000, extent(catraster)[1], extent(catraster)[2]), 
