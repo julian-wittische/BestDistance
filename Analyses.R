@@ -82,7 +82,7 @@ sim_geosites <- SpatialPoints(cdpop_sim1$grid_list$gen_101@other$xy,
 lizgridno0 <- lizgrid 
 lizgridno0[lizgridno0==0] <- NA
 
-#subs <- extract(lizgridno0, sim_geosites, cellnumber-TRUE, sp=TRUE)
+#subs <- extract(lizgridno0, sim_geosites, cellnumber=TRUE, sp=TRUE)
 
 library(spatialEco)
 lizgridno0poly <- rasterToPolygons(lizgridno0)
