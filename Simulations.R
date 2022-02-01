@@ -60,6 +60,10 @@ empir.sim(catraster = catraster_SA_coarser_cropped,
           habitat = 0.5,
           matemoveno = 5,
           matemoveparA = 1,
+<<<<<<< HEAD
           matemoveparB = 6,
           gridformat = "cdpop")
+=======
+          matemoveparB = 0.5)
+>>>>>>> 1572b86975639d7d9436c0333e4faab76e383c8c
 #try to lower n_ind and habitat together
