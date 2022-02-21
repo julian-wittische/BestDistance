@@ -111,15 +111,15 @@ abline(IBDsim_subs, col="red")
 plot(lizgrid)
 points(sim_subs_genind@other$xy)
 
-# par(mfrow=c(1,2))
-# 
-# plot(log(sim_subs_geo_dist), sim_subs_Loiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
-# abline(IBDsim_subs, col="red")
-# 
-# plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
-# abline(IBD, col="red")
+par(mfrow=c(1,2))
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_HIGHRES_HIGHIBD.rds")
+plot(log(sim_subs_geo_dist), sim_subs_Loiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
+abline(IBDsim_subs, col="red")
+
+plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
+abline(IBD, col="red")
+
+saveRDS(sim_subs_genind,"sim_subs_genind_HIGHRES_VERYLOWIBD3.rds")
 
 get_slope <- function(sim_genind_object){
   sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
@@ -156,3 +156,17 @@ lowhigh3 <- readRDS("sim_subs_genind_LOWRES_HIGHIBD3.rds")
 get_slope(lowhigh)
 get_slope(lowhigh2)
 get_slope(lowhigh3)
+
+lowverylow <- readRDS("sim_subs_genind_LOWRES_VERYLOWIBD.rds")
+lowverylow2 <- readRDS("sim_subs_genind_LOWRES_VERYLOWIBD2.rds")
+lowverylow3 <- readRDS("sim_subs_genind_LOWRES_VERYLOWIBD3.rds")
+get_slope(lowverylow)
+get_slope(lowverylow2)
+get_slope(lowverylow3)
+
+highverylow <- readRDS("sim_subs_genind_HIGHRES_VERYLOWIBD.rds")
+highverylow2 <- readRDS("sim_subs_genind_HIGHRES_VERYLOWIBD2.rds")
+highverylow3 <- readRDS("sim_subs_genind_HIGHRES_VERYLOWIBD3.rds")
+get_slope(highverylow)
+get_slope(highverylow2)
+get_slope(highverylow3)
