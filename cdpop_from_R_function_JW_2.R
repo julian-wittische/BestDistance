@@ -72,65 +72,65 @@
 #' 
 #' 
 cdpopJW <- function(CDPOP.py,
-                  sim_name = 'output_',
-                  pts,
-                  sim_dir,
-                  resist_rast,
-                  resist_mat = NULL,
-                  agefilename = NULL,
-                  mcruns = 1,
-                  looptime = 400,
-                  output_years = 50,
-                  gridformat = 'genepop',
-                  cdclimgentime = 0,
-                  matemoveno = 5,
-                  matemoveparA = 1,
-                  matemoveparB = 5,
-                  matemoveparC = 0,
-                  matemovethresh = 'max',
-                  output_matedistance = 'N',
-                  sexans = 'Y',
-                  Freplace = 'N',
-                  Mreplace = 'N',
-                  philopatry = 'N',
-                  multiple_paternity = 'N',
-                  selfans = 'N',
-                  Fdispmoveno = NULL,
-                  FdispmoveparA = 0,
-                  FdispmoveparB = 0,
-                  FdispmoveparC = 0,
-                  Fdispmovethresh = NULL,
-                  Mdispmoveno = NULL,
-                  MdispmoveparA = 0,
-                  MdispmoveparB = 0,
-                  MdispmoveparC = 0,
-                  Mdispmovethresh = NULL,
-                  offno = 2,
-                  MeanFecundity = 5,
-                  Femalepercent = 50,
-                  EqualsexratioBirth = 'N',
-                  TwinningPercent = 0,
-                  popModel = 'exp',
-                  r = 1,
-                  K_env = length(pts),
-                  subpopmortperc = 0,
-                  muterate = 0.0005,
-                  mutationtype = 'random',
-                  loci = 1000,
-                  intgenesans = 'random',
-                  allefreqfilename = 'N',
-                  alleles = 2,
-                  mtdna = 'N',
-                  startGenes = 0,
-                  cdevolveans = 'N',
-                  startSelection = 0,
-                  betaFile_selection = 'N',
-                  epistasis = 'N',
-                  epigeneans = 'N',
-                  startEpigene = 0,
-                  betaFile_epigene = 'N',
-                  cdinfect = 'N',
-                  transmissionprob = 0){
+                    sim_name = 'output_',
+                    pts,
+                    sim_dir,
+                    resist_rast,
+                    resist_mat = NULL,
+                    agefilename = NULL,
+                    mcruns = 1,
+                    looptime = 400,
+                    output_years = 50,
+                    gridformat = 'genepop',
+                    cdclimgentime = 0,
+                    matemoveno = 5,
+                    matemoveparA = 1,
+                    matemoveparB = 5,
+                    matemoveparC = 0,
+                    matemovethresh = 'max',
+                    output_matedistance = 'N',
+                    sexans = 'Y',
+                    Freplace = 'N',
+                    Mreplace = 'N',
+                    philopatry = 'N',
+                    multiple_paternity = 'N',
+                    selfans = 'N',
+                    Fdispmoveno = NULL,
+                    FdispmoveparA = 0,
+                    FdispmoveparB = 0,
+                    FdispmoveparC = 0,
+                    Fdispmovethresh = NULL,
+                    Mdispmoveno = NULL,
+                    MdispmoveparA = 0,
+                    MdispmoveparB = 0,
+                    MdispmoveparC = 0,
+                    Mdispmovethresh = NULL,
+                    offno = 2,
+                    MeanFecundity = 5,
+                    Femalepercent = 50,
+                    EqualsexratioBirth = 'N',
+                    TwinningPercent = 0,
+                    popModel = 'exp',
+                    r = 1,
+                    K_env = length(pts),
+                    subpopmortperc = 0,
+                    muterate = 0.0005,
+                    mutationtype = 'random',
+                    loci = 1000,
+                    intgenesans = 'random',
+                    allefreqfilename = 'N',
+                    alleles = 2,
+                    mtdna = 'N',
+                    startGenes = 0,
+                    cdevolveans = 'N',
+                    startSelection = 0,
+                    betaFile_selection = 'N',
+                    epistasis = 'N',
+                    epigeneans = 'N',
+                    startEpigene = 0,
+                    betaFile_epigene = 'N',
+                    cdinfect = 'N',
+                    transmissionprob = 0){
   
   
   # Install / Load Libraries ------------------------------------------------
@@ -399,23 +399,23 @@ cdpopJW <- function(CDPOP.py,
       #                                       paste0("A", rep_len(0:(alleles-1),length.out = nrow(cd_df))),
       #                                       sep="/"), loci), ncol=loci))
       
-      fakedf<<-data.frame(matrix(rep(paste(LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
+      fakedf <- data.frame(matrix(rep(paste(LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
                                           LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
                                           sep="/"), loci), ncol=loci))
       
-      fakedf <- lapply(fakedf, function(x) gsub("A","100", x))
-      fakedf <- lapply(fakedf, function(x) gsub("B","108", x))
-      fakedf <- lapply(fakedf, function(x) gsub("C","116", x))
-      fakedf <- lapply(fakedf, function(x) gsub("D","124", x))
-      fakedf <- lapply(fakedf, function(x) gsub("E","132", x))
-      fakedf <- lapply(fakedf, function(x) gsub("F","140", x))
-      fakedf <- lapply(fakedf, function(x) gsub("G","148", x))
-      fakedf <- lapply(fakedf, function(x) gsub("H","156", x))
-      fakedf <- lapply(fakedf, function(x) gsub("I","164", x))
-      fakedf <- lapply(fakedf, function(x) gsub("J","172", x))
-      fakedf <- lapply(fakedf, function(x) gsub("K","180", x))
-      fakedf <- lapply(fakedf, function(x) gsub("L","188", x))
-
+      gsub("A","100", fakedf)
+      gsub("B","108", fakedf)
+      gsub("C","116", fakedf)
+      gsub("D","124", fakedf)
+      gsub("E","132", fakedf)
+      gsub("F","140", fakedf)
+      gsub("G","148", fakedf)
+      gsub("H","156", fakedf)
+      gsub("I","164", fakedf)
+      gsub("J","172", fakedf)
+      gsub("K","180", fakedf)
+      gsub("L","188", fakedf)
+      
       colnames(fakedf) <- paste0("L",1:loci)
       ncode <- 1
       gi <- adegenet::df2genind(fakedf, ploidy=2, sep="/", type="codom")
@@ -423,8 +423,8 @@ cdpopJW <- function(CDPOP.py,
       propertabnames <- character(0)
       for (i in 1:loci){
         propertabnames <- c(propertabnames, paste(names(gi$all.names)[i],
-                                unlist(gi$all.names)[1:alleles],
-                                sep="."))                                
+                                                  unlist(gi$all.names)[1:alleles],
+                                                  sep="."))                                
       }
       colnames(gi@tab) <- propertabnames
       gi@other$xy <- cdpop_out[occ_pop, c(1,2)]

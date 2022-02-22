@@ -35,7 +35,12 @@ empir.sim <- function(catraster = catraster,
                        matemoveparA = 1,
                        matemoveparB = 5,
                        MeanFecundity = 4,
-                       n_axes = 64)
+                       n_axes = 4,
+                       Res_rem = 1,
+                       Res_for = 1,
+                       Res_urb = 1,
+                       Res_riv = 1,
+                       Res_inf = 1)
   {
 
   if(is.null(start)) {
@@ -71,12 +76,12 @@ empir.sim <- function(catraster = catraster,
                   'iter__', z, "/")
 
     # >> Create Truth ---------------------------------------------------------
-    Resist <- catraster 
-    Resist[Resist==0] <- 20 # Remaing built-up
-    Resist[Resist==1] <- 10# Forest and open areas
-    Resist[Resist==2] <- 70 # Urban areas
-    Resist[Resist==3] <- 80 # River
-    Resist[Resist==4] <- 1 # Transport infrastructure
+    Resist <- catraster + 9999
+    Resist[Resist==9999] <- Res_rem # Remaing built-up
+    Resist[Resist==10000] <- Res_for # Forest and open areas
+    Resist[Resist==10001] <- Res_urb # Urban areas
+    Resist[Resist==10002] <- Res_riv # River
+    Resist[Resist==10003] <- Res_inf # Transport infrastructure
     # Load sampling sites ------------------------------------------------------
     pts <- unique(floor(cbind(runif(100000, extent(catraster)[1], extent(catraster)[2]), 
                               runif(100000, extent(catraster)[3], extent(catraster)[4]))))
