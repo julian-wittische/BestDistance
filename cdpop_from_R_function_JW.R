@@ -399,22 +399,22 @@ cdpopJW <- function(CDPOP.py,
       #                                       paste0("A", rep_len(0:(alleles-1),length.out = nrow(cd_df))),
       #                                       sep="/"), loci), ncol=loci))
       
-      fakedf<<-data.frame(matrix(rep(paste(LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
+      fakedf <- data.frame(matrix(rep(paste(LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
                                           LETTERS[rep_len(1:alleles,length.out = nrow(cd_df))],
                                           sep="/"), loci), ncol=loci))
       
-      fakedf <- lapply(fakedf, function(x) gsub("A","100", x))
-      fakedf <- lapply(fakedf, function(x) gsub("B","108", x))
-      fakedf <- lapply(fakedf, function(x) gsub("C","116", x))
-      fakedf <- lapply(fakedf, function(x) gsub("D","124", x))
-      fakedf <- lapply(fakedf, function(x) gsub("E","132", x))
-      fakedf <- lapply(fakedf, function(x) gsub("F","140", x))
-      fakedf <- lapply(fakedf, function(x) gsub("G","148", x))
-      fakedf <- lapply(fakedf, function(x) gsub("H","156", x))
-      fakedf <- lapply(fakedf, function(x) gsub("I","164", x))
-      fakedf <- lapply(fakedf, function(x) gsub("J","172", x))
-      fakedf <- lapply(fakedf, function(x) gsub("K","180", x))
-      fakedf <- lapply(fakedf, function(x) gsub("L","188", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("A","100", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("B","108", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("C","116", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("D","124", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("E","132", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("F","140", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("G","148", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("H","156", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("I","164", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("J","172", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("K","180", x))
+      fakedf <- apply(fakedf, 2, function(x) gsub("L","188", x))
 
       colnames(fakedf) <- paste0("L",1:loci)
       ncode <- 1
