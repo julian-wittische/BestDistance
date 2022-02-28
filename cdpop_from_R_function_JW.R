@@ -452,26 +452,3 @@ cdpopJW <- function(CDPOP.py,
   return(out)
   
 }
-
-# PCA dist -------------------------------------------------------
-
-pca_dist <- function(gi,
-                     n_axes = 64){
-  a_tab <- adegenet::tab(gi)
-  pc <- prcomp(a_tab)
-  pc_dist <- as.matrix(dist(pc$x[,1:n_axes]))
-  return(pc_dist)
-}
-
-# Random Samples ----------------------------------------------------------
-
-## Randomly select populations and individuals from within populations
-
-gi_samp <- function(gi,
-                    n_ind = 100) {
-  ind_samp <- sort(sample(1:nInd(gi), n_ind))
-  gi_s <- gi[ind_samp]
-  
-  out <- list(genind = gi_s,
-              pop_samp = ind_samp)
-}

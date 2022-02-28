@@ -42,8 +42,8 @@ empir_geo_dist2 <- empir_geo_dist
 empir_geo_dist2[empir_geo_dist2==0] <- NA
 IBD <- lm(c(as.dist(empirLoiselle_EcoGenetics))~log(c(as.dist(empir_geo_dist2))))
 summary(IBD)
-plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics)
-abline(IBD, col="red")
+# plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics)
+# abline(IBD, col="red")
 
 ################################################################################
 ################################################################################
@@ -73,7 +73,7 @@ lizgrid[] <- 0
 lizcellrowcol <- rowColFromCell(lizgrid, as.numeric(names(lizpercell[,1])))
 lizgrid[lizcellrowcol] <- lizpercell
 
-plot(lizgrid)
+# plot(lizgrid)
 ################################################################################
 # Let us try to subsample to get a similar sampling as the empirical dataset
 sim_geosites <- SpatialPoints(cdpop_sim1$grid_list$gen_101@other$xy,
@@ -86,14 +86,17 @@ lizgridno0[lizgridno0==0] <- NA
 
 library(spatialEco)
 lizgridno0poly <- rasterToPolygons(lizgridno0)
-plot(lizgridno0poly)
+# plot(lizgridno0poly)
 subs <- erase.point(sim_geosites, lizgridno0poly, inside=FALSE)
 
 "%IN%" <- function(x, y) interaction(x) %in% interaction(y)
 
 index <- cdpop_sim1$grid_list$gen_101@other$xy  %IN% as.data.frame(subs)
 sim_subs_genind <- cdpop_sim1$grid_list$gen_101[index]
-sim_subs_genind
+# This is to have exactly the same number of individuals as in the empirical dataset
+stop(sim_subs_genind <- sim_subs_genind[sample(1:nrow(sim_subs_genind@tab),
+                                          nrow(lizgen.genind@tab),
+                                          replace = FALSE),])
 
 #sim_subs_genind <- readRDS("sim_subs_genind.rds")
 
@@ -105,8 +108,8 @@ sim_subs_Loiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(sim_subs_genind)
 mantel.randtest(as.dist(sim_subs_geo_dist), as.dist(1-sim_subs_Loiselle_EcoGenetics))
 IBDsim_subs <- lm(c(as.dist(sim_subs_Loiselle_EcoGenetics))~log(c(as.dist(sim_subs_geo_dist))))
 summary(IBDsim_subs)
-plot(log(sim_subs_geo_dist), sim_subs_Loiselle_EcoGenetics)
-abline(IBDsim_subs, col="red")
+# plot(log(sim_subs_geo_dist), sim_subs_Loiselle_EcoGenetics)
+# abline(IBDsim_subs, col="red")
 
 plot(lizgrid)
 points(sim_subs_genind@other$xy)
@@ -119,7 +122,9 @@ abline(IBDsim_subs, col="red")
 plot(log(empir_geo_dist2), empirLoiselle_EcoGenetics, xlim=c(0,10), ylim=c(-0.3,0.45))
 abline(IBD, col="red")
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_HIGHRES_VERYLOWIBD3.rds")
+sim_subs_genind
+
+# saveRDS(sim_subs_genind,"sim_subs_genind_TWORES_MIDIBD3.rds")
 # 
 # get_slope <- function(sim_genind_object){
 #   sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
@@ -128,6 +133,14 @@ abline(IBD, col="red")
 #   IBDsim <- lm(c(as.dist(sim_genind_object_Loiselle_EcoGenetics))~log(c(as.dist(sim_genind_object_geo_dist))))
 #   return(summary(IBDsim))
 # }
+# 
+# get_slope(readRDS("sim_subs_genind_TWORES_HIGHIBD1.rds"))
+# get_slope(readRDS("sim_subs_genind_TWORES_HIGHIBD2.rds"))
+# get_slope(readRDS("sim_subs_genind_TWORES_HIGHIBD3.rds"))
+# readRDS("sim_subs_genind_TWORES_HIGHIBD1.rds")
+# readRDS("sim_subs_genind_TWORES_HIGHIBD2.rds")
+# readRDS("sim_subs_genind_TWORES_HIGHIBD3.rds")
+
 # 
 # highlow <- readRDS("sim_subs_genind_HIGHRES_LOWIBD.rds")
 # highlow2 <- readRDS("sim_subs_genind_HIGHRES_LOWIBD2.rds")
