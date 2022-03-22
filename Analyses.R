@@ -94,9 +94,9 @@ subs <- erase.point(sim_geosites, lizgridno0poly, inside=FALSE)
 index <- cdpop_sim1$grid_list$gen_101@other$xy  %IN% as.data.frame(subs)
 sim_subs_genind <- cdpop_sim1$grid_list$gen_101[index]
 # This is to have exactly the same number of individuals as in the empirical dataset
-stop(sim_subs_genind <- sim_subs_genind[sample(1:nrow(sim_subs_genind@tab),
+sim_subs_genind <- sim_subs_genind[sample(1:nrow(sim_subs_genind@tab),
                                           nrow(lizgen.genind@tab),
-                                          replace = FALSE),])
+                                          replace = FALSE),]
 
 #sim_subs_genind <- readRDS("sim_subs_genind.rds")
 
@@ -124,7 +124,7 @@ abline(IBD, col="red")
 
 sim_subs_genind
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_TWORES_MIDIBD3.rds")
+# saveRDS(sim_subs_genind,"sim_subs_genind_ALLRES_LOWIBD3.rds")
 # 
 # get_slope <- function(sim_genind_object){
 #   sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
