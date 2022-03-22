@@ -28,4 +28,4 @@ empir.sim(catraster = catraster_SA_coarser_cropped,
           JULIA_HOME = "C:/Users/Utilisateur/AppData/Local/Programs/Julia-1.7.1/bin/",
           CDPOP.py = 'C:/Users/Utilisateur/Desktop/Projects/BestDistance/CDPOP-master/src/CDPOP.py',
           sim_dir = "C:/Users/Utilisateur/Desktop/Projects/BestDistance/cdpop_sim_TEST/",
-          seed = 1)
+          seed = 1335)

@@ -124,62 +124,73 @@ abline(IBD, col="red")
 
 sim_subs_genind
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_ALLRES_LOWIBD3.rds")
+# saveRDS(sim_subs_genind,"sim_subs_genind_ALLRES_MIDIBD1.rds")
 # 
-# get_slope <- function(sim_genind_object){
-#   sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
-#   sim_genind_object_geo_dist[sim_genind_object_geo_dist==0] <- NA
-#   sim_genind_object_Loiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(sim_genind_object))
-#   IBDsim <- lm(c(as.dist(sim_genind_object_Loiselle_EcoGenetics))~log(c(as.dist(sim_genind_object_geo_dist))))
-#   return(summary(IBDsim))
-# }
-# 
-# get_slope(readRDS("sim_subs_genind_TWORES_HIGHIBD1.rds"))
-# get_slope(readRDS("sim_subs_genind_TWORES_HIGHIBD2.rds"))
-# get_slope(readRDS("sim_subs_genind_TWORES_HIGHIBD3.rds"))
-# readRDS("sim_subs_genind_TWORES_HIGHIBD1.rds")
-# readRDS("sim_subs_genind_TWORES_HIGHIBD2.rds")
-# readRDS("sim_subs_genind_TWORES_HIGHIBD3.rds")
+get_slope <- function(sim_genind_object){
+  sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
+  sim_genind_object_geo_dist[sim_genind_object_geo_dist==0] <- NA
+  sim_genind_object_Loiselle_EcoGenetics <- eco.kin.loiselle(genind2ecogen(sim_genind_object))
+  IBDsim <- lm(c(as.dist(sim_genind_object_Loiselle_EcoGenetics))~log(c(as.dist(sim_genind_object_geo_dist))))
+  return(summary(IBDsim))
+}
 
-# 
-# highlow <- readRDS("sim_subs_genind_HIGHRES_LOWIBD.rds")
-# highlow2 <- readRDS("sim_subs_genind_HIGHRES_LOWIBD2.rds")
-# highlow3 <- readRDS("sim_subs_genind_HIGHRES_LOWIBD3.rds")
-# get_slope(highlow)
-# get_slope(highlow2)
-# get_slope(highlow3)
-# 
-# highhigh <- readRDS("sim_subs_genind_HIGHRES_HIGHIBD.rds")
-# highhigh2 <- readRDS("sim_subs_genind_HIGHRES_HIGHIBD2.rds")
-# highhigh3 <- readRDS("sim_subs_genind_HIGHRES_HIGHIBD3.rds")
-# get_slope(highhigh)
-# get_slope(highhigh2)
-# get_slope(highhigh3)
-# 
-# lowlow <- readRDS("sim_subs_genind_LOWRES_LOWIBD.rds")
-# lowlow2 <- readRDS("sim_subs_genind_LOWRES_LOWIBD2.rds")
-# lowlow3 <- readRDS("sim_subs_genind_LOWRES_LOWIBD3.rds")
-# get_slope(lowlow)
-# get_slope(lowlow2)
-# get_slope(lowlow3)
-# 
-# lowhigh <- readRDS("sim_subs_genind_LOWRES_HIGHIBD.rds")
-# lowhigh2 <- readRDS("sim_subs_genind_LOWRES_HIGHIBD2.rds")
-# lowhigh3 <- readRDS("sim_subs_genind_LOWRES_HIGHIBD3.rds")
-# get_slope(lowhigh)
-# get_slope(lowhigh2)
-# get_slope(lowhigh3)
-# 
-# lowverylow <- readRDS("sim_subs_genind_LOWRES_VERYLOWIBD.rds")
-# lowverylow2 <- readRDS("sim_subs_genind_LOWRES_VERYLOWIBD2.rds")
-# lowverylow3 <- readRDS("sim_subs_genind_LOWRES_VERYLOWIBD3.rds")
-# get_slope(lowverylow)
-# get_slope(lowverylow2)
-# get_slope(lowverylow3)
-# 
-# highverylow <- readRDS("sim_subs_genind_HIGHRES_VERYLOWIBD.rds")
-# highverylow2 <- readRDS("sim_subs_genind_HIGHRES_VERYLOWIBD2.rds")
-# highverylow3 <- readRDS("sim_subs_genind_HIGHRES_VERYLOWIBD3.rds")
-# get_slope(highverylow)
-# get_slope(highverylow2)
-# get_slope(highverylow3)
+
+AL1 <- readRDS("sim_subs_genind_ALLRES_LOWIBD1.rds")
+AL2 <- readRDS("sim_subs_genind_ALLRES_LOWIBD2.rds")
+AL3 <- readRDS("sim_subs_genind_ALLRES_LOWIBD3.rds")
+AL1
+AL2
+AL3
+get_slope(AL1)
+get_slope(AL2)
+get_slope(AL3)
+
+AM1 <- readRDS("sim_subs_genind_ALLRES_MIDIBD1.rds")
+AM2 <- readRDS("sim_subs_genind_ALLRES_MIDIBD2.rds")
+AM3 <- readRDS("sim_subs_genind_ALLRES_MIDIBD3.rds")
+AM1
+AM2
+AM3
+get_slope(AM1)
+get_slope(AM2)
+get_slope(AM3)
+
+AH1 <- readRDS("sim_subs_genind_ALLRES_HIGHIBD1.rds")
+AH2 <- readRDS("sim_subs_genind_ALLRES_HIGHIBD2.rds")
+AH3 <- readRDS("sim_subs_genind_ALLRES_HIGHIBD3.rds")
+AH1
+AH2
+AH3
+get_slope(AH1)
+get_slope(AH2)
+get_slope(AH3)
+
+TL1 <- readRDS("sim_subs_genind_TWORES_LOWIBD1.rds")
+TL2 <- readRDS("sim_subs_genind_TWORES_LOWIBD2.rds")
+TL3 <- readRDS("sim_subs_genind_TWORES_LOWIBD3.rds")
+TL1
+TL2
+TL3
+get_slope(TL1)
+get_slope(TL2)
+get_slope(TL3)
+
+TM1 <- readRDS("sim_subs_genind_TWORES_MIDIBD1.rds")
+TM2 <- readRDS("sim_subs_genind_TWORES_MIDIBD2.rds")
+TM3 <- readRDS("sim_subs_genind_TWORES_MIDIBD3.rds")
+TM1
+TM2
+TM3
+get_slope(TM1)
+get_slope(TM2)
+get_slope(TM3)
+
+TH1 <- readRDS("sim_subs_genind_TWORES_HIGHIBD1.rds")
+TH2 <- readRDS("sim_subs_genind_TWORES_HIGHIBD2.rds")
+TH3 <- readRDS("sim_subs_genind_TWORES_HIGHIBD3.rds")
+TH1
+TH2
+TH3
+get_slope(TH1)
+get_slope(TH2)
+get_slope(TH3)
