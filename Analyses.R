@@ -124,7 +124,7 @@ abline(IBD, col="red")
 
 sim_subs_genind
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_ALLRES_LOWIBD3.rds")
+# saveRDS(sim_subs_genind,"sim_subs_genind_3.2.15.30.1RES_HIGHIBD1.rds")
 # 
 get_slope <- function(sim_genind_object){
   sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
