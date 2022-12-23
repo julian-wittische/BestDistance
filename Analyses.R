@@ -124,7 +124,7 @@ abline(IBD, col="red")
 
 sim_subs_genind
 
-# saveRDS(sim_subs_genind,"sim_subs_genind_ALLRES_LOWIBD3.rds")
+# saveRDS(sim_subs_genind,"sim_subs_genind_3.2.15.30.1RES_LOWIBD3.rds")
 # 
 get_slope <- function(sim_genind_object){
   sim_genind_object_geo_dist <- as.matrix(dist(sim_genind_object@other$xy))
@@ -135,9 +135,9 @@ get_slope <- function(sim_genind_object){
 }
 
 
-AL1 <- readRDS("sim_subs_genind_ALLRES_LOWIBD1.rds")
-AL2 <- readRDS("sim_subs_genind_ALLRES_LOWIBD2.rds")
-AL3 <- readRDS("sim_subs_genind_ALLRES_LOWIBD3.rds")
+AL1 <- readRDS("sim_subs_genind_3.2.15.30.1RES_LOWIBD1.rds")
+AL2 <- readRDS("sim_subs_genind_3.2.15.30.1RES_LOWIBD2.rds")
+AL3 <- readRDS("sim_subs_genind_3.2.15.30.1RES_LOWIBD3.rds")
 AL1
 AL2
 AL3
@@ -145,9 +145,9 @@ get_slope(AL1)
 get_slope(AL2)
 get_slope(AL3)
 
-AM1 <- readRDS("sim_subs_genind_ALLRES_MIDIBD1.rds")
-AM2 <- readRDS("sim_subs_genind_ALLRES_MIDIBD2.rds")
-AM3 <- readRDS("sim_subs_genind_ALLRES_MIDIBD3.rds")
+AM1 <- readRDS("sim_subs_genind_3.2.15.30.1RES_MODIBD1.rds")
+AM2 <- readRDS("sim_subs_genind_3.2.15.30.1RES_MODIBD2.rds")
+AM3 <- readRDS("sim_subs_genind_3.2.15.30.1RES_MODIBD3.rds")
 AM1
 AM2
 AM3
@@ -155,9 +155,9 @@ get_slope(AM1)
 get_slope(AM2)
 get_slope(AM3)
 
-AH1 <- readRDS("sim_subs_genind_ALLRES_HIGHIBD1.rds")
-AH2 <- readRDS("sim_subs_genind_ALLRES_HIGHIBD2.rds")
-AH3 <- readRDS("sim_subs_genind_ALLRES_HIGHIBD3.rds")
+AH1 <- readRDS("sim_subs_genind_3.2.15.30.1RES_HIGHIBD1.rds")
+AH2 <- readRDS("sim_subs_genind_3.2.15.30.1RES_HIGHIBD2.rds")
+AH3 <- readRDS("sim_subs_genind_3.2.15.30.1RES_HIGHIBD3.rds")
 AH1
 AH2
 AH3
@@ -165,9 +165,9 @@ get_slope(AH1)
 get_slope(AH2)
 get_slope(AH3)
 
-TL1 <- readRDS("sim_subs_genind_TWORES_LOWIBD1.rds")
-TL2 <- readRDS("sim_subs_genind_TWORES_LOWIBD2.rds")
-TL3 <- readRDS("sim_subs_genind_TWORES_LOWIBD3.rds")
+TL1 <- readRDS("sim_subs_genind_1.1.15.30.1RES_LOWIBD1.rds")
+TL2 <- readRDS("sim_subs_genind_1.1.15.30.1RES_LOWIBD2.rds")
+TL3 <- readRDS("sim_subs_genind_1.1.15.30.1RES_LOWIBD3.rds")
 TL1
 TL2
 TL3
@@ -175,9 +175,9 @@ get_slope(TL1)
 get_slope(TL2)
 get_slope(TL3)
 
-TM1 <- readRDS("sim_subs_genind_TWORES_MIDIBD1.rds")
-TM2 <- readRDS("sim_subs_genind_TWORES_MIDIBD2.rds")
-TM3 <- readRDS("sim_subs_genind_TWORES_MIDIBD3.rds")
+TM1 <- readRDS("sim_subs_genind_1.1.15.30.1RES_MODIBD1.rds")
+TM2 <- readRDS("sim_subs_genind_1.1.15.30.1RES_MODIBD2.rds")
+TM3 <- readRDS("sim_subs_genind_1.1.15.30.1RES_MODIBD3.rds")
 TM1
 TM2
 TM3
@@ -185,9 +185,9 @@ get_slope(TM1)
 get_slope(TM2)
 get_slope(TM3)
 
-TH1 <- readRDS("sim_subs_genind_TWORES_HIGHIBD1.rds")
-TH2 <- readRDS("sim_subs_genind_TWORES_HIGHIBD2.rds")
-TH3 <- readRDS("sim_subs_genind_TWORES_HIGHIBD3.rds")
+TH1 <- readRDS("sim_subs_genind_1.1.15.30.1RES_HIGHIBD1.rds")
+TH2 <- readRDS("sim_subs_genind_1.1.15.30.1RES_HIGHIBD2.rds")
+TH3 <- readRDS("sim_subs_genind_1.1.15.30.1RES_HIGHIBD3.rds")
 TH1
 TH2
 TH3
